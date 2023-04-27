@@ -12,6 +12,9 @@
 
 from __future__ import print_function
 
+import zmq
+import numpy as np
+import time
 import binascii
 import csv
 import os
@@ -234,6 +237,13 @@ if __name__ == '__main__':
             pass
     global_buffer_len = 0
     lost_data_len = 0
+
+    # ZMQ
+    context = zmq.Context()
+    socket = context.socket(zmq.SUB)
+    socket.connect("tcp://127.0.0.1:55555") # connect, not bind, the PUB will bind, only 1 can bind
+    socket.setsockopt(zmq.SUBSCRIBE, b'') # subscribe to topic of all (needed or else it won't work)
+ 
     try:
         while True:
             # Move to the next BLE scanning channel
@@ -248,7 +258,11 @@ if __name__ == '__main__':
                 stat.reset()
 
             # Fetch data from Gnu Radio message queue
-            gr_buffer += gr_block.message_queue.delete_head().to_string()
+            #gr_buffer += gr_block.message_queue.delete_head().to_string()
+            if socket.poll(10) != 0: # check if there is a message on the socket
+                msg = socket.recv().decode('latin-1') # grab the message
+                gr_buffer += msg
+                
 
             if len(gr_buffer) < opts.min_buffer_size:
                 continue
@@ -281,7 +295,7 @@ if __name__ == '__main__':
 
                 # Extract BLE Access Address
                 ble_access_address = unpack(
-                    'I', gr_buffer[pos:pos + BLE_ADDR_LEN])[0]
+                    'I', gr_buffer[pos:pos + BLE_ADDR_LEN].encode("latin-1"))[0]
                 pos += BLE_ADDR_LEN
 
                 # Dewhitening received BLE Header
@@ -370,3 +384,4 @@ if __name__ == '__main__':
 pcap_fd.close()
 gr_block.stop()
 gr_block.wait()
+print("SAFE OVER")

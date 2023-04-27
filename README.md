@@ -1,6 +1,11 @@
 # ble_dump - SDR Bluetooth LE dumper
 
-This repository is a fork of [ble-dump](https://github.com/drtyhlpr/ble_dump.git) proposed in 2016 by Jan Wagner mail@jwagner.eu
+This repository is a fork of [sdr4iot-ble-rx](https://github.com/Rtone/sdr4iot-ble-rx) proposed in 2021 by [Rtone](https://github.com/Rtone).
+
+> ==**The original project used a message sink block, which cannot be used that way in the new version of GNU Radio (3.10.5.1). Therefore, I will use ZMQ block instead to make the project operational again.**==
+> 
+> ==The operating environment of the original project: `Ubuntu 18.04.6 LTS` + `GNU Radio Companion 3.7.11`== ==
+
 
 # Introduction
 This tool was created to dump Bluetooth LE (BLE) packets using SDR hardware. The captured BLE packets can either be saved to a PCAP file or displayed directly in Wireshark via a named pipe (FIFO). Gnu Radio is used to receive and demodulate the incoming BLE packets. The received packet bytes are transferred to ble_dump using a common Gnu Radio Message Sink.
@@ -129,7 +134,7 @@ pip install sigmf
 * If the default hopping pattern is used, and you want to receive BLE data it should be possible to hop only a limited number of BLE data channels. Keep in mind that the initial CRC value (not 0x555555) is essential to determine the validity of incoming BLE data packets.
 * Feel free to help and improve the code!
 
-The generated Gnu Radio Companion (GRC) signal flow graph (grc/gr_ble.py) was slightly modified to avoid errors. If you re-generate the GRC flow graph please run to following command-line:
+~~The generated Gnu Radio Companion (GRC) signal flow graph (grc/gr_ble.py) was slightly modified to avoid errors. If you re-generate the GRC flow graph please run to following command-line:~~(No longer needed)
 
 ```
 sed -i -e "s/message_sink_msgq_out,/message_queue,/" -e "s/message_sink_msgq_out = virtual_sink_msgq_in/self.message_queue = message_queue/" ./grc/gr_ble.py
