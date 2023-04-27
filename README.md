@@ -2,9 +2,9 @@
 
 This repository is a fork of [sdr4iot-ble-rx](https://github.com/Rtone/sdr4iot-ble-rx) proposed in 2021 by [Rtone](https://github.com/Rtone).
 
-> ==**The original project used a message sink block, which cannot be used that way in the new version of GNU Radio (3.10.5.1). Therefore, I will use ZMQ block instead to make the project operational again.**==
+> **The original project used a message sink block, which cannot be used that way in the new version of GNU Radio (3.10.5.1). Therefore, I will use ZMQ block instead to make the project operational again.** 
 > 
-> ==The operating environment of the original project: `Ubuntu 18.04.6 LTS` + `GNU Radio Companion 3.7.11`== ==
+> The operating environment of the original project: `Ubuntu 18.04.6 LTS` + `GNU Radio Companion 3.7.11`
 
 
 # Introduction
