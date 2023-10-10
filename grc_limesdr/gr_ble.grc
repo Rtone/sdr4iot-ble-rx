@@ -210,7 +210,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [232, 180]
+    coordinate: [296, 148.0]
     rotation: 0
     state: enabled
 - name: rf_gain
@@ -311,7 +311,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [256, 472.0]
+    coordinate: [272, 476.0]
     rotation: 0
     state: enabled
 - name: digital_gfsk_demod_0
@@ -407,8 +407,8 @@ blocks:
     ant7: ''
     ant8: ''
     ant9: ''
-    args: '"hackrf=0"'
-    bb_gain0: '0'
+    args: limesdr=000907060247100D
+    bb_gain0: '20'
     bb_gain1: '20'
     bb_gain10: '20'
     bb_gain11: '20'
@@ -577,7 +577,7 @@ blocks:
     freq7: 100e6
     freq8: 100e6
     freq9: 100e6
-    gain0: '100'
+    gain0: '10'
     gain1: '10'
     gain10: '10'
     gain11: '10'
@@ -641,7 +641,7 @@ blocks:
     gain_mode7: 'False'
     gain_mode8: 'False'
     gain_mode9: 'False'
-    if_gain0: '89'
+    if_gain0: '20'
     if_gain1: '20'
     if_gain10: '20'
     if_gain11: '20'
@@ -710,7 +710,7 @@ blocks:
     nchan: '1'
     num_mboards: '1'
     sample_rate: sample_rate
-    sync: pc_clock
+    sync: none
     time_source0: ''
     time_source1: ''
     time_source2: ''
@@ -724,9 +724,9 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [8, 380]
+    coordinate: [0, 388.0]
     rotation: 0
-    state: enabled
+    state: true
 - name: unpacked_to_packed
   id: blocks_unpacked_to_packed_xx
   parameters:
@@ -753,7 +753,6 @@ blocks:
     affinity: ''
     alias: ''
     comment: ''
-    drop_on_hwm: 'True'
     hwm: '-1'
     key: ''
     pass_tags: 'False'
@@ -779,4 +778,4 @@ connections:
 
 metadata:
   file_format: 1
-  grc_version: 3.10.5.1
+  grc_version: 3.10.7.0

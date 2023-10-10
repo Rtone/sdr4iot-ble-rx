@@ -12,7 +12,6 @@
 
 import csv
 import os
-import urllib2
 from datetime import datetime, timedelta
 from struct import pack, unpack
 from time import time
@@ -135,7 +134,7 @@ def write_pcap(fd, ble_channel, ble_access_address, ble_data):
                   BLE_CHANS[ble_channel], 0xff, 0xff, 0x00, ble_access_address, ble_flags, ble_access_address))
 
     # Write BLE packet
-    fd.write(''.join(chr(x) for x in ble_data))
+    fd.write(bytes(ble_data))
     fd.flush()
 
 # Record start/end of BLE packets, channel frequency and sample rate  into a csv file

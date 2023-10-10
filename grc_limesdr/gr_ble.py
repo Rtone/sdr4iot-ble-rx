@@ -7,7 +7,7 @@
 # GNU Radio Python Flow Graph
 # Title: Bluetooth LE Receiver
 # Author: Jan Wagner
-# GNU Radio version: 3.10.5.1
+# GNU Radio version: 3.10.7.0
 
 from gnuradio import analog
 from gnuradio import blocks
@@ -61,21 +61,20 @@ class gr_ble(gr.top_block):
         # Blocks
         ##################################################
 
-        self.zeromq_pub_sink_0 = zeromq.pub_sink(gr.sizeof_char, 1, 'tcp://127.0.0.1:55555', 100, False, (-1), '', True)
+        self.zeromq_pub_sink_0 = zeromq.pub_sink(gr.sizeof_char, 1, 'tcp://127.0.0.1:55555', 100, False, (-1), '')
         self.unpacked_to_packed = blocks.unpacked_to_packed_bb(1, gr.GR_LSB_FIRST)
         self.rtlsdr_source_0 = osmosdr.source(
-            args="numchan=" + str(1) + " " + "hackrf=0"
+            args="numchan=" + str(1) + " " + 'limesdr=000907060247100D'
         )
-        self.rtlsdr_source_0.set_time_now(osmosdr.time_spec_t(time.time()), osmosdr.ALL_MBOARDS)
         self.rtlsdr_source_0.set_sample_rate(sample_rate)
         self.rtlsdr_source_0.set_center_freq((freq+freq_offset), 0)
         self.rtlsdr_source_0.set_freq_corr(0, 0)
         self.rtlsdr_source_0.set_dc_offset_mode(0, 0)
         self.rtlsdr_source_0.set_iq_balance_mode(0, 0)
         self.rtlsdr_source_0.set_gain_mode(False, 0)
-        self.rtlsdr_source_0.set_gain(100, 0)
-        self.rtlsdr_source_0.set_if_gain(89, 0)
-        self.rtlsdr_source_0.set_bb_gain(0, 0)
+        self.rtlsdr_source_0.set_gain(10, 0)
+        self.rtlsdr_source_0.set_if_gain(20, 0)
+        self.rtlsdr_source_0.set_bb_gain(20, 0)
         self.rtlsdr_source_0.set_antenna('', 0)
         self.rtlsdr_source_0.set_bandwidth(0, 0)
         self.freq_xlating_fir_filter_lp = filter.freq_xlating_fir_filter_ccc(1, lowpass_filter, (-freq_offset), sample_rate)
